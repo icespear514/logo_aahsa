@@ -1,6 +1,8 @@
 import { SubmissionForm } from '@/components/SubmissionForm'
 import { createServiceClient } from '@/lib/supabase/service'
 
+export const dynamic = 'force-dynamic'
+
 export default async function SubmissionPage() {
   const service = createServiceClient()
   const { data: settings } = await service
