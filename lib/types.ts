@@ -41,22 +41,28 @@ export type Database = {
         Row: Profile
         Insert: Omit<Profile, 'created_at'>
         Update: Partial<Omit<Profile, 'id'>>
+        Relationships: []
       }
       submissions: {
         Row: Submission
         Insert: Omit<Submission, 'submitted_at' | 'is_winner'>
         Update: Partial<Omit<Submission, 'id'>>
+        Relationships: []
       }
       votes: {
         Row: Vote
         Insert: Omit<Vote, 'id' | 'created_at'>
-        Update: never
+        Update: Partial<Omit<Vote, 'id' | 'created_at'>>
+        Relationships: []
       }
       contest_settings: {
         Row: ContestSettings
         Insert: Partial<ContestSettings>
         Update: Partial<Omit<ContestSettings, 'id'>>
+        Relationships: []
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
   }
 }
