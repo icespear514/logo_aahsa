@@ -43,18 +43,7 @@ export default async function SubmissionPage() {
             </p>
           </div>
           <div className="px-8 py-8">
-            {submissionsOpen ? (
-              <SubmissionForm />
-            ) : (
-              <div className="text-center py-8">
-                <p className="font-heading text-lg font-semibold text-aahsa-navy mb-2">
-                  Submissions are now closed
-                </p>
-                <p className="text-sm text-gray-500">
-                  Thank you to everyone who submitted a design. Our team is now reviewing all entries.
-                </p>
-              </div>
-            )}
+            <SubmissionForm submissionsOpen={submissionsOpen} />
           </div>
         </div>
       </main>

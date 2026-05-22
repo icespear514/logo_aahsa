@@ -15,7 +15,7 @@ const ACCEPTED_MIME_TYPES = [
 ]
 const MAX_BYTES = 5 * 1024 * 1024 // 5MB
 
-export function SubmissionForm() {
+export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: boolean }) {
   const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [email, setEmail] = useState('')
@@ -197,9 +197,10 @@ export function SubmissionForm() {
       <Button
         type="submit"
         loading={submitting}
+        disabled={!submissionsOpen}
         className="w-full py-3 text-base"
       >
-        {submitting ? 'Uploading…' : 'Submit My Logo'}
+        {submitting ? 'Uploading…' : submissionsOpen ? 'Submit My Logo' : 'Submissions are Closed'}
       </Button>
     </form>
   )
