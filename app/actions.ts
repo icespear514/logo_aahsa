@@ -110,10 +110,12 @@ export async function declareWinner(submissionId: string) {
   const service = createServiceClient()
 
   // Clear any existing winner first
-  await service
+  const { error: clearError } = await service
     .from('submissions')
     .update({ is_winner: false })
     .eq('is_winner', true)
+
+  if (clearError) return { error: clearError.message }
 
   const { error } = await service
     .from('submissions')
@@ -168,10 +170,7 @@ export async function removeVoter(profileId: string) {
   if (!user) return { error: 'Unauthorized' }
 
   const service = createServiceClient()
-  const { error } = await service
-    .from('profiles')
-    .delete()
-    .eq('id', profileId)
+  const { error } = await service.auth.admin.deleteUser(profileId)
 
   if (error) return { error: error.message }
 

@@ -1,6 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { isMaster } from '@/lib/roles'
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
@@ -67,7 +68,7 @@ export async function middleware(request: NextRequest) {
         .eq('id', user.id)
         .single()
 
-      if (profile?.role !== 'master') {
+      if (!isMaster(profile?.role)) {
         return NextResponse.redirect(new URL('/admin/dashboard', request.url))
       }
     }
