@@ -4,14 +4,17 @@ import { useState, useTransition } from 'react'
 import { updateContestSettings } from '@/app/actions'
 
 type Props = {
+  submissionsOpen: boolean
   votingOpen: boolean
   winnerPageActive: boolean
 }
 
 export function SettingsControls({
+  submissionsOpen: initialSubmissionsOpen,
   votingOpen: initialVotingOpen,
   winnerPageActive: initialWinnerPageActive,
 }: Props) {
+  const [submissionsOpen, setSubmissionsOpen] = useState(initialSubmissionsOpen)
   const [votingOpen, setVotingOpen] = useState(initialVotingOpen)
   const [winnerPageActive, setWinnerPageActive] = useState(
     initialWinnerPageActive
@@ -20,7 +23,7 @@ export function SettingsControls({
   const [error, setError] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
 
-  function toggle(field: 'voting_open' | 'winner_page_active', value: boolean) {
+  function toggle(field: 'submissions_open' | 'voting_open' | 'winner_page_active', value: boolean) {
     setError(null)
     setMessage(null)
     startTransition(async () => {
@@ -28,6 +31,7 @@ export function SettingsControls({
       if (result?.error) {
         setError(result.error)
       } else {
+        if (field === 'submissions_open') setSubmissionsOpen(value)
         if (field === 'voting_open') setVotingOpen(value)
         if (field === 'winner_page_active') setWinnerPageActive(value)
         setMessage('Settings updated.')
@@ -45,6 +49,33 @@ export function SettingsControls({
           {message}
         </div>
       )}
+
+      {/* Submissions toggle */}
+      <div className="flex items-center justify-between px-6 py-4">
+        <div>
+          <p className="font-semibold text-aahsa-navy text-sm">Submissions</p>
+          <p className="text-xs text-gray-500 mt-0.5">
+            {submissionsOpen
+              ? 'Currently open — public can submit logos'
+              : 'Closed — submission form is disabled'}
+          </p>
+        </div>
+        <button
+          onClick={() => toggle('submissions_open', !submissionsOpen)}
+          disabled={isPending}
+          className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none disabled:opacity-50 ${
+            submissionsOpen ? 'bg-aahsa-teal' : 'bg-gray-200'
+          }`}
+          role="switch"
+          aria-checked={submissionsOpen}
+        >
+          <span
+            className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform transition duration-200 ease-in-out ${
+              submissionsOpen ? 'translate-x-5' : 'translate-x-0'
+            }`}
+          />
+        </button>
+      </div>
 
       {/* Voting toggle */}
       <div className="flex items-center justify-between px-6 py-4">

@@ -131,6 +131,7 @@ export async function declareWinner(submissionId: string) {
 // ─── Contest Settings ─────────────────────────
 
 export async function updateContestSettings(settings: {
+  submissions_open?: boolean
   voting_open?: boolean
   winner_page_active?: boolean
 }) {

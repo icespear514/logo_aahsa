@@ -1,6 +1,16 @@
 import { SubmissionForm } from '@/components/SubmissionForm'
+import { createServiceClient } from '@/lib/supabase/service'
 
-export default function SubmissionPage() {
+export default async function SubmissionPage() {
+  const service = createServiceClient()
+  const { data: settings } = await service
+    .from('contest_settings')
+    .select('submissions_open')
+    .eq('id', 1)
+    .single()
+
+  const submissionsOpen = settings?.submissions_open ?? true
+
   return (
     <div className="min-h-screen bg-aahsa-cream">
       {/* Header */}
@@ -31,7 +41,18 @@ export default function SubmissionPage() {
             </p>
           </div>
           <div className="px-8 py-8">
-            <SubmissionForm />
+            {submissionsOpen ? (
+              <SubmissionForm />
+            ) : (
+              <div className="text-center py-8">
+                <p className="font-heading text-lg font-semibold text-aahsa-navy mb-2">
+                  Submissions are now closed
+                </p>
+                <p className="text-sm text-gray-500">
+                  Thank you to everyone who submitted a design. Our team is now reviewing all entries.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </main>

@@ -38,6 +38,7 @@ export default async function SettingsPage() {
         </h2>
         {settings && (
           <SettingsControls
+            submissionsOpen={settings.submissions_open}
             votingOpen={settings.voting_open}
             winnerPageActive={settings.winner_page_active}
           />

@@ -27,6 +27,7 @@ export type Vote = {
 
 export type ContestSettings = {
   id: number
+  submissions_open: boolean
   voting_open: boolean
   winner_page_active: boolean
   updated_at: string
