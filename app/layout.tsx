@@ -15,9 +15,9 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  title: 'AAHSA Logo Contest',
+  title: 'NAHSAC Logo Contest',
   description:
-    'Submit your logo design for the National Aboriginal Head Start Logo Contest.',
+    'Submit your logo design for the National Aboriginal Head Start Association of Canada Logo Contest.',
 }
 
 export default function RootLayout({

@@ -29,7 +29,7 @@ export default async function AdminLayout({
         <div className="mx-auto max-w-7xl px-4 py-0 flex items-center justify-between h-14">
           <div className="flex items-center gap-6">
             <span className="font-heading text-white font-bold text-base">
-              AAHSA Contest
+              NAHSAC Contest
             </span>
             <Link
               href="/admin/dashboard"

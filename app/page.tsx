@@ -8,10 +8,10 @@ export default function SubmissionPage() {
         <div className="mx-auto max-w-3xl flex items-center gap-4">
           <div>
             <p className="text-aahsa-ochre text-sm font-semibold tracking-wide uppercase">
-              Alberta Aboriginal Head Start Association
+              National Aboriginal Head Start Association of Canada
             </p>
             <h1 className="font-heading text-2xl font-bold text-white leading-tight">
-              National Aboriginal Head Start
+              NAHSAC
             </h1>
             <p className="text-aahsa-cream/80 text-lg font-heading">
               Logo Contest

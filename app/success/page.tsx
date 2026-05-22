@@ -6,10 +6,10 @@ export default function SuccessPage() {
       <header className="bg-aahsa-navy py-6 px-4 shadow-md">
         <div className="mx-auto max-w-3xl">
           <p className="text-aahsa-ochre text-sm font-semibold tracking-wide uppercase">
-            Alberta Aboriginal Head Start Association
+            National Aboriginal Head Start Association of Canada
           </p>
           <h1 className="font-heading text-2xl font-bold text-white">
-            National Aboriginal Head Start — Logo Contest
+            NAHSAC — Logo Contest
           </h1>
         </div>
       </header>

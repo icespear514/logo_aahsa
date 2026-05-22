@@ -6,7 +6,24 @@
       "PowerShell(Get-ChildItem *)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(npm run *)",
+      "Bash(git check-ignore *)",
+      "Bash(npm list *)",
+      "Bash(npm ls *)",
+      "Bash(node -e \"const path = require\\('path'\\); console.log\\('vitest config test environment is node - this is OK for utils but will fail for React components'\\)\")",
+      "Bash(Get-ChildItem *)",
+      "Bash(git *)",
+      "Bash(npx tsc *)",
+      "Bash(Select-Object Name)",
+      "Bash(npx vitest *)",
+      "Bash(npm test *)",
+      "Bash(Select-Object FullName)",
+      "Skill(superpowers:using-superpowers)",
+      "PowerShell(New-Item *)",
+      "Bash(npm install *)",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Bash(node -e \"require\\('./node_modules/dotenv'\\)\")"
     ]
   }
 }
