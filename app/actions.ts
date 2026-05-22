@@ -146,6 +146,7 @@ export async function updateContestSettings(settings: {
 
   if (error) return { error: error.message }
 
+  revalidatePath('/')
   revalidatePath('/admin/settings')
   revalidatePath('/admin/dashboard')
   return { success: true }
