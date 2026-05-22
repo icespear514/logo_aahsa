@@ -38,7 +38,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <p className="text-aahsa-ochre text-xs font-semibold tracking-wide uppercase mb-1">
-            Alberta Aboriginal Head Start Association
+            National Aboriginal Head Start Association of Canada
           </p>
           <h1 className="font-heading text-2xl font-bold text-aahsa-navy">
             Contest Management
