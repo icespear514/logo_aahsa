@@ -29,7 +29,7 @@ Date: ${formattedDate}
 We will be in touch if your design is selected.
 
 — The NAHSAC Team
-contest@nahsac.ca`
+nahsac@mydatavault.ca`
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ contest@nahsac.ca`
     </table>
     <p>We will be in touch if your design is selected.</p>
     <hr style="border: none; border-top: 1px solid #E8E0D5; margin: 24px 0;">
-    <p style="color: #666; font-size: 14px;">— The NAHSAC Team<br><a href="mailto:contest@nahsac.ca" style="color: #C4742A;">contest@nahsac.ca</a></p>
+    <p style="color: #666; font-size: 14px;">— The NAHSAC Team<br><a href="mailto:nahsac@mydatavault.ca" style="color: #C4742A;">nahsac@mydatavault.ca</a></p>
   </div>
 </body>
 </html>`
@@ -67,7 +67,7 @@ export async function sendConfirmationEmail(data: ConfirmationEmailData) {
   const resend = new Resend(process.env.RESEND_API_KEY)
   const { subject, text, html } = buildConfirmationEmail(data)
   return resend.emails.send({
-    from: process.env.EMAIL_FROM ?? 'contest@nahsac.ca',
+    from: process.env.EMAIL_FROM ?? 'nahsac@mydatavault.ca',
     to: data.to,
     subject,
     text,
