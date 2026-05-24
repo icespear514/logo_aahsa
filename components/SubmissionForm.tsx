@@ -2,7 +2,7 @@
 
 import { useState, useRef, DragEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { Turnstile } from '@marsidev/react-turnstile'
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import { createClient } from '@/lib/supabase/client'
 import { createSubmission } from '@/app/actions'
 import { Button } from '@/components/ui/Button'
@@ -19,6 +19,7 @@ const MAX_BYTES = 5 * 1024 * 1024 // 5MB
 export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: boolean }) {
   const router = useRouter()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const turnstileRef = useRef<TurnstileInstance>(null)
   const [email, setEmail] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
@@ -95,6 +96,9 @@ export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: b
       })
 
       if (result?.error) {
+        await supabase.storage.from('logos').remove([storagePath])
+        setCaptchaToken(null)
+        turnstileRef.current?.reset()
         setError(result.error)
         return
       }
@@ -192,9 +196,11 @@ export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: b
 
       {/* Captcha */}
       <Turnstile
+        ref={turnstileRef}
         siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
         onSuccess={(token) => setCaptchaToken(token)}
         onExpire={() => setCaptchaToken(null)}
+        onError={() => setError('Verification failed to load. Please refresh the page.')}
       />
 
       {/* Error */}

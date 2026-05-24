@@ -26,7 +26,12 @@ export async function createSubmission(data: {
   public_url: string
   captchaToken: string
 }) {
-  const ok = await verifyCaptcha(data.captchaToken)
+  let ok: boolean
+  try {
+    ok = await verifyCaptcha(data.captchaToken)
+  } catch {
+    return { error: 'Captcha configuration error. Please contact the administrator.' }
+  }
   if (!ok) return { error: 'Captcha verification failed. Please try again.' }
 
   const service = createServiceClient()
