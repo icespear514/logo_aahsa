@@ -2,6 +2,7 @@
 
 import { useState, useRef, DragEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { createClient } from '@/lib/supabase/client'
 import { createSubmission } from '@/app/actions'
 import { Button } from '@/components/ui/Button'
@@ -24,6 +25,7 @@ export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: b
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   function handleFile(selected: File) {
     setError(null)
@@ -82,13 +84,14 @@ export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: b
         data: { publicUrl },
       } = supabase.storage.from('logos').getPublicUrl(storagePath)
 
-      // Server Action: insert DB row + send email
+      // Server Action: verify captcha, insert DB row + send email
       const result = await createSubmission({
         submission_id,
         email,
         filename: file.name,
         storage_path: storagePath,
         public_url: publicUrl,
+        captchaToken: captchaToken!,
       })
 
       if (result?.error) {
@@ -187,6 +190,13 @@ export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: b
         )}
       </div>
 
+      {/* Captcha */}
+      <Turnstile
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+        onSuccess={(token) => setCaptchaToken(token)}
+        onExpire={() => setCaptchaToken(null)}
+      />
+
       {/* Error */}
       {error && (
         <p className="rounded-md bg-red-50 px-4 py-2 text-sm text-red-700 border border-red-200">
@@ -197,7 +207,7 @@ export function SubmissionForm({ submissionsOpen = true }: { submissionsOpen?: b
       <Button
         type="submit"
         loading={submitting}
-        disabled={!submissionsOpen}
+        disabled={!submissionsOpen || captchaToken === null}
         className="w-full py-3 text-base"
       >
         {submitting ? 'Uploading…' : submissionsOpen ? 'Submit My Logo' : 'Submissions are Closed'}
