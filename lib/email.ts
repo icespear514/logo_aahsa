@@ -19,7 +19,7 @@ export function buildConfirmationEmail(data: ConfirmationEmailData) {
 
   const subject = 'Your logo submission has been received — NAHSAC Logo Contest'
 
-  const text = `Thank you for submitting your logo design to the National Aboriginal Head Start Association of Canada Association of Canada Logo Contest!
+  const text = `Thank you for submitting your logo design to the National Aboriginal Head Start Association of Canada Logo Contest!
 
 We have received your submission and our team will be reviewing all entries.
 
@@ -41,7 +41,7 @@ nahsac@mdvedm.com`
   </div>
   <div style="background: #fff; padding: 24px; border-radius: 0 0 8px 8px; border: 1px solid #E8E0D5; border-top: none;">
     <h2 style="color: #C4742A;">Thank you for your submission!</h2>
-    <p>Thank you for submitting your logo design to the <strong>National Aboriginal Head Start Association of Canada Association of Canada Logo Contest</strong>!</p>
+    <p>Thank you for submitting your logo design to the <strong>National Aboriginal Head Start Association of Canada Logo Contest</strong>!</p>
     <p>We have received your submission and our team will be reviewing all entries.</p>
     <table style="margin: 20px 0; border-collapse: collapse;">
       <tr>

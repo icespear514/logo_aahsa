@@ -20,7 +20,7 @@ describe('buildConfirmationEmail', () => {
 
   it('includes the contest name in plain text', () => {
     const { text } = buildConfirmationEmail(sample)
-    expect(text).toContain('National Aboriginal Head Start Logo Contest')
+    expect(text).toContain('National Aboriginal Head Start Association of Canada Logo Contest')
   })
 
   it('returns non-empty subject', () => {
@@ -30,6 +30,6 @@ describe('buildConfirmationEmail', () => {
 
   it('HTML contains AAHSA sign-off', () => {
     const { html } = buildConfirmationEmail(sample)
-    expect(html).toContain('AAHSA Team')
+    expect(html).toContain('NAHSAC Team')
   })
 })
