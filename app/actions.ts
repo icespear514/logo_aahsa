@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createServiceClient } from '@/lib/supabase/service'
 import { sendConfirmationEmail } from '@/lib/email'
 import { isMaster } from '@/lib/roles'
+import { verifyCaptcha } from '@/lib/captcha'
 
 // ─── Auth ─────────────────────────────────────
 
@@ -23,7 +24,11 @@ export async function createSubmission(data: {
   filename: string
   storage_path: string
   public_url: string
+  captchaToken: string
 }) {
+  const ok = await verifyCaptcha(data.captchaToken)
+  if (!ok) return { error: 'Captcha verification failed. Please try again.' }
+
   const service = createServiceClient()
 
   const { error } = await service.from('submissions').insert({
